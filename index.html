@@ -12,74 +12,72 @@
     <title>辩论计时器</title>
 </head>
 
-<body>
+<body onload="initialize()">
     <div class="pushable">
-
-        <body>
-            <div class="ui sidebar inverted vertical menu">
-                <a class="item" onclick="$('.ui.sidebar').sidebar('toggle');">
-                    1
-                </a>
-                <a class="item">
-                    2
-                </a>
-                <a class="item">
-                    3
-                </a>
-            </div>
-            <div class="pusher" id="body">
-                <!--<button class="ui button" style="background: none" onclick="$('.ui.sidebar').sidebar('toggle');">
-                    <i class="bars icon"></i>
-                  </button>-->
-                <header>
-                    <h1 id="mainHeader">青少年更应该脚踏实地还是仰望星空</h1>
-                </header>
-                <div id="main">
-                    <div class="ui equal width stackable internally celled grid">
-                        <div style="margin: auto;">
-                            <p id="segment">当前环节：</p>
-                        </div>
-                        <div class="center aligned row">
-                            <div class="column">
-                                <div class="centralContent">
-                                    <h1>正方</h1>
-                                </div>
-                                <div class="content">
-                                    <div class="nameList">
-                                        <p id="nameListp">正方一辩 <br>正方二辩 </p>
-                                    </div>
-                                </div>
-                                <div class="centralContent">
-                                    <div class="timer">
-                                        <p id="clockp">0:00</p>
-                                    </div>
+        <div class="ui sidebar inverted vertical menu">
+            <a class="item" onclick="$('.ui.sidebar').sidebar('toggle');">
+                1
+            </a>
+            <a class="item" onclick="initialize()">
+                2
+            </a>
+            <a class="item" >
+                3
+            </a>
+        </div>
+        <div class="pusher" id="body">
+            <button class="ui icon button" onclick="$('.ui.sidebar').sidebar('toggle');" style="position: fixed;">
+                <i class="bars icon"></i>
+            </button>
+            <header>
+                <h1 id="mainHeader">青少年更应该脚踏实地还是仰望星空</h1>
+            </header>
+            <div id="main">
+                <div class="ui equal width stackable internally celled grid">
+                    <div style="margin: auto;">
+                        <p id="stage">当前环节：</p>
+                    </div>
+                    <div class="center aligned row">
+                        <div class="column">
+                            <div class="centralContent">
+                                <h1>正方</h1>
+                            </div>
+                            <div class="content">
+                                <div class="nameList" style="text-align: left;">
+                                    <p id="nameListp">正方一辩 <br>正方二辩 </p>
                                 </div>
                             </div>
-                            <div class="column">
-                                <div class="centralContent">
-                                    <h1>反方</h1>
-                                </div>
-                                <div class="content" style="margin-left: auto;">
-                                    <div class="nameList">
-                                        <p id="nameListn">反方一辩 <br>反方二辩 </p>
-                                    </div>
-                                </div>
-                                <div class="centralContent">
-                                    <div class="timer">
-                                        <p id="clockn">0:00</p>
-                                    </div>
+                            <div class="centralContent">
+                                <div class="timer">
+                                    <p id="clockp">0:00</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="controlPanel" style="margin: auto;">
-                            <button class="button" id=""><i class="play icon"></i></button>
-                            <button class="button" id=""><i class="pause icon"></i></button>
-                            <button class="button" id="">没想好这个拿来干啥</button>
-                            <button class="button" id="settings"><i class="cog icon"></i></button>
+                        <div class="column">
+                            <div class="centralContent">
+                                <h1>反方</h1>
+                            </div>
+                            <div class="content" style="margin-left: auto;">
+                                <div class="nameList" style="text-align: right;">
+                                    <p id="nameListn">反方一辩 <br>反方二辩 </p>
+                                </div>
+                            </div>
+                            <div class="centralContent">
+                                <div class="timer">
+                                    <p id="clockn">0:00</p>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="controlPanel" style="margin: auto;">
+                        <button class="ui primary icon button" id="start" onclick="start()"><i class="play icon"></i></button>
+                        <button class="ui icon button" id="pause" onclick="pause()"><i class="pause icon"></i></button>
+                        <button class="ui icon button" id="" onclick="skipStage()"><i class="forward icon"></i></button>
+                        <button class="ui icon button" id="" onclick="initialize()"><i class="undo icon"></i></button>
+                        <button class="ui icon button" id="settings"><i class="cog icon"></i></button>
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
     </div>
 </body>
