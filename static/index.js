@@ -8,9 +8,11 @@ var posDebater2 = "卓不群";
 var negDebater1 = "卓大气";
 var negDebater2 = "卓天下";
 var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "自由辩论"]
-var stageTimes = [70, 180, 180, 180, 150]//秒
+var stageTimes = [1, 1, 1, 1, 150]//秒
 var posSecond = 0;
 var negSecond = 0;
+let negloop = null;
+let posloop = null;
 function initialize() {
     stageNow = 0;
     statuNow = 0;
@@ -44,11 +46,8 @@ function refreshTimer() {
 function stageGo() {
     let startButton = document.getElementById("start");
     document.getElementById("stage").innerHTML = "当前环节：" + stages[stageNow];
-    console.info(stageNow);
     posSecond = stageTimes[stageNow];
-    console.info(posSecond);
     negSecond = stageTimes[stageNow];
-    console.info(negSecond);
     startButton.removeEventListener("click",start);
     startButton.addEventListener("click",positiveLoop);
     refreshStage();
@@ -56,15 +55,13 @@ function stageGo() {
 }
 
 function positiveLoop(){
+    console.info("Positive Loop");
     refreshStage;
     let startButton = document.getElementById("start");
     let pauseButton = document.getElementById("pause");
-    let posloop = setInterval(function () {
+    posloop = setInterval(function () {
         posSecond--;
         refreshTimer();
-        pauseButton.addEventListener('click', function () {
-            clearInterval(posloop);
-        });
         if(posSecond == 60) {minleft.play()}
         if(posSecond == 0) {timesup.play()}
         if(posSecond<=0){
@@ -73,33 +70,54 @@ function positiveLoop(){
             if (stageNow < (stages.length - 1)) { stageNow++; }
             startButton.removeEventListener("click",positiveLoop);
             startButton.addEventListener("click",negativeLoop);
-            clearInterval(posloop)
+            clearInterval(posloop);
         }
     }, 1000);
 }
 
 function negativeLoop(){
+    console.info("Negative Loop");
     let startButton = document.getElementById("start");
-    let pauseButton = document.getElementById("pause");
-    let negloop = setInterval(function () {
+    negloop = setInterval(function () {
         negSecond--;
         refreshTimer();
-        pauseButton.addEventListener('click', function () {
-            clearInterval(negloop);
-        });
         if(negSecond == 60) {minleft.play()}
         if(negSecond == 0) {timesup.play()}
         if(negSecond<=0){
             statuNow = 1;
             startButton.removeEventListener("click",negativeLoop);
             startButton.addEventListener("click",start);
-            clearInterval(negloop)
-            stageGo;
+            clearInterval(negloop);
+            start;
         }
     }, 1000);
 }
 
 function start() {
+    let pauseButton = document.getElementById("pause");
+    let exchangeButton = document.getElementById("exchange");
+    exchangeButton.onclick = function(){
+        console.info("exchange activate");
+        if(statuNow==1){
+            statuNow = 2;
+            console.info("status edited"+statuNow);
+            negativeLoop();
+            console.info("Negative Loop Start");
+            clearInterval(posloop);
+        }else if(statuNow==2){
+            statuNow = 1;
+            console.info("status edited"+statuNow);
+            positiveLoop();
+            console.info("Positive Loop Start");
+            clearInterval(negloop);
+        }
+    }
+    pauseButton.addEventListener('click', function () {
+        clearInterval(negloop);
+    });
+    pauseButton.addEventListener('click', function () {
+        clearInterval(posloop);
+    });
     statuNow = 1;
     stageGo();
 }
