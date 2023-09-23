@@ -1,0 +1,100 @@
+@font-face {
+    font-family: MiSans;
+    src: url(MiSans-Bold.ttf);
+}
+
+#body {
+    background-image: url(https://api.lo-li.icu/Bing/);
+    background-attachment: fixed;
+    background-size: cover;
+    inset: 0;
+    z-index: -1;
+    object-fit: cover;
+    margin: 0;
+}
+
+header{
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#mainHeader {
+    display: block;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
+    top: 0;
+    color: #0a0a0a;
+    align-items: center;
+    max-width: fit-content;
+    text-align: center;
+    font-size: 4em;
+    border-radius: 8px;
+    border-width: 4px;
+}
+
+#main {
+    margin: auto;
+    margin-top: 20px;
+    max-width: 90%;
+    min-width: 350px;
+    padding: 5px;
+    background-color: rgba(182, 214, 255, 0.7);
+    color: #404040;
+    font-family: MiSans;
+    border-radius: 8px;
+    border-width: 4px;
+    filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+}
+
+h1{
+    font-size: 3em;
+    font-family: MiSans;
+}
+
+.content{
+    background-color: rgb(126, 180, 255);
+    max-width: fit-content;
+    border-radius: 8px;
+    border-width: 4px;
+    color: white;
+    padding: 5px;
+    display: block;
+    margin: 5px;
+}
+.centralContent{
+    margin: 0,auto;
+} 
+
+.nameList{
+    font-size: 2em;
+}
+
+.timer{
+    font-size: 5em;
+}
+
+#segment{
+    font-size: 3em;
+}
+
+.button{
+    font-size: 2em;
+    font-family: MiSans;
+    padding: 5px;
+}
+
+.i{
+    margin: auto;
+}
+
+* {
+    box-sizing: border-box;
+    scrollbar-width: none;
+    font-family: MiSans;
+}
