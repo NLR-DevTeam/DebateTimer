@@ -1,12 +1,12 @@
 const timesup = new Audio("./static/timeup.mp3"); 
 const minleft = new Audio("./static/1min.mp3");
-var title = "青少年更应该脚踏实地还是仰望星空？";
+var title = "辩论计时器";
 var stageNow = 0;//第几个阶段
 var statuNow = 0;//0：准备 1：正方发言 2：反方发言 3：
-var posDebater1 = "卓尔";
-var posDebater2 = "卓不群";
-var negDebater1 = "卓大气";
-var negDebater2 = "卓天下";
+var posDebater1 = "";
+var posDebater2 = "";
+var negDebater1 = "";
+var negDebater2 = "";
 var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "自由辩论"]
 var stageTimes = [180, 180, 180, 180, 150]//秒
 var posSecond = 0;
