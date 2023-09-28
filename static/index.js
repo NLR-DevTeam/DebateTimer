@@ -99,7 +99,7 @@ function positiveLoopStart() {
     posloop = setInterval(function () {
         posSecond--;
         refreshTimer();
-        if (posSecond == 60) { minleft.play() }
+        if (posSecond == 30) { minleft.play() }
         if (posSecond == 0) { timesup.play() }
         if (posSecond <= 0) {
             if (negSecond > 0) {
@@ -129,7 +129,7 @@ function negativeLoopStart() {
     negloop = setInterval(function () {
         negSecond--;
         refreshTimer();
-        if (negSecond == 60) { minleft.play() }
+        if (negSecond == 30) { minleft.play() }
         if (negSecond == 0) { timesup.play() }
         if (negSecond <= 0) {
             if (posSecond > 0) {
