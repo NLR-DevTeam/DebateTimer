@@ -8,7 +8,7 @@
 }
 
 #body {
-    background-image: url(https://api.lo-li.icu/Bing/);
+    background-image: url(https://api.cyrilstudio.top/bing/image.php);
     background-attachment: fixed;
     background-size: cover;
     inset: 0;
@@ -28,7 +28,8 @@ header{
 
 #mainHeader {
     display: block;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-left: 10px;
     margin-right: 10px;
     width: 100%;
@@ -41,11 +42,12 @@ header{
     border-radius: 8px;
     border-width: 4px;
     font-family: Title;
+    background-color: rgba(221, 221, 221, 0.7);
 }
 
 #main {
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
     max-width: 90%;
     min-width: 350px;
     padding: 5px;
