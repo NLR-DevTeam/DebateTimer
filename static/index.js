@@ -24,7 +24,7 @@ function initialize() {
     document.getElementById("nameListp").innerHTML = "正方一辩 " + posDebater1 + "<br>正方二辩 " + posDebater2;
     document.getElementById("nameListn").innerHTML = negDebater1 + " 反方一辩<br>" + negDebater2 + " 反方二辩";
     refreshStage();
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
         clearInterval(i);
     }
     negTimerGoing = false;
@@ -37,14 +37,14 @@ function initialize() {
     let exchangeButton = document.getElementById("exchange");
     exchangeButton.onclick = function () {
         console.info("exchange activate");
-        if (statuNow == 1) {
+        if (statuNow == 1 && negSecond > 0) {
             statuNow = 2;
             console.info("status edited" + statuNow);
             negativeLoopStart();
             console.info("Negative Loop Start");
             posTimerGoing = false;
             clearInterval(posloop);
-        } else if (statuNow == 2) {
+        } else if (statuNow == 2 && posSecond > 0) {
             statuNow = 1;
             console.info("status edited" + statuNow);
             positiveLoopStart();
@@ -56,9 +56,16 @@ function initialize() {
     //暂停按钮
     let pauseButton = document.getElementById("pause");
     pauseButton.addEventListener('click', function () {
+        let startButton = document.getElementById("start");
+        if (statuNow == 1) {
+            startButton.addEventListener("click", positiveLoopStart);
+        }
+        else if (statuNow == 2) {
+            startButton.addEventListener("click", negativeLoopStart);
+        }
         negTimerGoing = false;
         posTimerGoing = false;
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 20; i++) {
             clearInterval(i);
         }
     });
@@ -93,9 +100,10 @@ function start() {
 }
 
 function positiveLoopStart() {
-    console.info("Positive Loop");
-    posTimerGoing = true;
     let startButton = document.getElementById("start");
+    console.info("Positive Loop");
+    startButton.removeEventListener("click", positiveLoopStart);
+    posTimerGoing = true;
     posloop = setInterval(function () {
         posSecond--;
         refreshTimer();
@@ -106,13 +114,11 @@ function positiveLoopStart() {
                 statuNow = 2;
                 refreshStage();
                 if (stageNow < (stages.length - 1)) { stageNow++; }
-                startButton.removeEventListener("click", positiveLoopStart);
                 startButton.addEventListener("click", negativeLoopStart);
                 posTimerGoing = false;
                 clearInterval(posloop);
             } else {
                 statuNow = 1;
-                startButton.removeEventListener("click", positiveLoopStart);
                 startButton.addEventListener("click", start);
                 posTimerGoing = false;
                 start();
@@ -123,9 +129,10 @@ function positiveLoopStart() {
 }
 
 function negativeLoopStart() {
-    console.info("Negative Loop");
-    negTimerGoing = true;
     let startButton = document.getElementById("start");
+    console.info("Negative Loop");
+    startButton.removeEventListener("click", negativeLoopStart);
+    negTimerGoing = true;
     negloop = setInterval(function () {
         negSecond--;
         refreshTimer();
@@ -134,14 +141,12 @@ function negativeLoopStart() {
         if (negSecond <= 0) {
             if (posSecond > 0) {
                 statuNow = 1;
-                startButton.removeEventListener("click", negativeLoopStart);
                 startButton.addEventListener("click", positiveLoopStart);
                 negTimerGoing = false;
                 positiveLoopStart();
                 clearInterval(negloop);
             } else {
                 statuNow = 1;
-                startButton.removeEventListener("click", negativeLoopStart);
                 startButton.addEventListener("click", start);
                 negTimerGoing = false;
                 start();
