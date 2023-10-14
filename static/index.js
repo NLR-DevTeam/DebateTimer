@@ -10,7 +10,7 @@ var posDebater2 = "";
 var negDebater1 = "";
 var negDebater2 = "";
 var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "自由辩论", "自由辩论", "结辩陈词", "结辩陈词"]
-var stageTimes = [180, 180, 180, 180, 150, 150, 180, 0, 0]//秒
+var stageTimes = [180, 180, 180, 180, 150, 150, 120, 0, 0]//秒
 var posSecond = 0;
 var negSecond = 0;
 let negloop = null;
@@ -56,7 +56,7 @@ function initialize() {
     //暂停按钮
     let pauseButton = document.getElementById("pause");
     pauseButton.addEventListener('click', function () {
-        let startButton = document.getElementById("start");
+        let startButton = document.getElementById("start"); ``
         if (statuNow == 1) {
             startButton.addEventListener("click", positiveLoopStart);
         }
@@ -157,9 +157,9 @@ function negativeLoopStart() {
 }
 //跳过该阶段
 function skipStage() {
-    if (statuNow == 1) {
+    if (statuNow == 1 && posSecond > 1) {
         posSecond = 1;
-    } else if (statuNow == 2) {
+    } else if (statuNow == 2 && negSecond > 1) {
         negSecond = 1;
     }
     refreshTimer();
@@ -182,12 +182,16 @@ function refreshTimer() {
     let posClock = document.getElementById("clockp");
     let negClock = document.getElementById("clockn");
     var minutes, seconds;
-    minutes = (posSecond - (posSecond % 60)) / 60;
-    seconds = (posSecond - (60 * minutes));
-    if (seconds < 10 && seconds >= 0) { seconds = "0" + seconds }
-    posClock.innerHTML = minutes + ":" + seconds;
-    minutes = (negSecond - (negSecond % 60)) / 60;
-    seconds = (negSecond - (60 * minutes));
-    if (seconds < 10 && seconds >= 0) { seconds = "0" + seconds }
-    negClock.innerHTML = minutes + ":" + seconds;
+    if (posSecond >= 0) {
+        minutes = (posSecond - (posSecond % 60)) / 60;
+        seconds = (posSecond - (60 * minutes));
+        if (seconds < 10 && seconds >= 0) { seconds = "0" + seconds }
+        posClock.innerHTML = minutes + ":" + seconds;
+    }
+    if (negSecond >= 0) {
+        minutes = (negSecond - (negSecond % 60)) / 60;
+        seconds = (negSecond - (60 * minutes));
+        if (seconds < 10 && seconds >= 0) { seconds = "0" + seconds }
+        negClock.innerHTML = minutes + ":" + seconds;
+    }
 }
