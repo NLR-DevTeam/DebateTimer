@@ -13,6 +13,7 @@ var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "�
 var stageTimes = [180, 180, 180, 180, 150, 150, 120, 0, 0]//秒
 var posSecond = 0;
 var negSecond = 0;
+var intervals = [];
 let negloop = null;
 let posloop = null;
 //初始化
@@ -24,7 +25,7 @@ function initialize() {
     document.getElementById("nameListp").innerHTML = "正方一辩 " + posDebater1 + "<br>正方二辩 " + posDebater2;
     document.getElementById("nameListn").innerHTML = negDebater1 + " 反方一辩<br>" + negDebater2 + " 反方二辩";
     refreshStage();
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0;i<20;i++) {
         clearInterval(i);
     }
     negTimerGoing = false;
@@ -93,8 +94,14 @@ function start() {
     posSecond = stageTimes[stageNow];
     negSecond = stageTimes[stageNow];
     refreshTimer();
-    startButton.removeEventListener("click", start);
-    startButton.addEventListener("click", positiveLoopStart);
+    if(stages[stageNow]=="结辩陈词"){
+        startButton.removeEventListener("click", start);
+        startButton.addEventListener("click", negativeLoopStart); 
+        statuNow = 2;
+    }else{
+        startButton.removeEventListener("click", start);
+        startButton.addEventListener("click", positiveLoopStart);   
+    }
     refreshStage();
     if (stageNow < (stages.length - 1)) { stageNow++; }
 }
@@ -119,6 +126,7 @@ function positiveLoopStart() {
                 clearInterval(posloop);
             } else {
                 statuNow = 1;
+                if (stageNow < (stages.length - 1)) { stageNow++; }
                 startButton.addEventListener("click", start);
                 posTimerGoing = false;
                 start();
