@@ -151,7 +151,9 @@ function negativeLoopStart() {
                 statuNow = 1;
                 startButton.addEventListener("click", positiveLoopStart);
                 negTimerGoing = false;
+                    if(stages[stageNow]=="自由辩论"){
                 positiveLoopStart();
+                }
                 clearInterval(negloop);
             } else {
                 statuNow = 1;
