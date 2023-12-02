@@ -95,44 +95,53 @@
         <div class="ui equal width stackable internally celled grid">
             <div class="center aligned row">
                 <div class="column">
-                    <div class="header">
-                        辩论信息
-                    </div>
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            辩题
+                    <div style="width: 100%;">
+                        <div class="header">
+                            <h3>辩论信息</h3>
                         </div>
-                        <input type="text" placeholder="辩题" id="title">
-                    </div>
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            正方一辩
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                辩题
+                            </div>
+                            <input type="text" placeholder="辩题" id="title">
                         </div>
-                        <input type="text" placeholder="正方一辩" id="pos1">
-                    </div>
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            正方二辩
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                正方一辩
+                            </div>
+                            <input type="text" placeholder="正方一辩" id="pos1">
                         </div>
-                        <input type="text" placeholder="正方二辩" id="pos2">
-                    </div>
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            反方一辩
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                正方二辩
+                            </div>
+                            <input type="text" placeholder="正方二辩" id="pos2">
                         </div>
-                        <input type="text" placeholder="反方一辩" id="neg1">
-                    </div>
-                    <div class="ui labeled input">
-                        <div class="ui label">
-                            反方二辩
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                反方一辩
+                            </div>
+                            <input type="text" placeholder="反方一辩" id="neg1">
                         </div>
-                        <input type="text" placeholder="反方二辩" id="neg2">
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                反方二辩
+                            </div>
+                            <input type="text" placeholder="反方二辩" id="neg2">
+                        </div>
                     </div>
                 </div>
                 <div class="column">
                     <div class="header">
-                        其他设置
+                        <h3>其他设置</h3>
                     </div>
+                    <div class="ui fluid labeled action input">
+                        <div class="ui label">
+                            背景样式
+                        </div>
+                        <input type="text" id="bgSetting" placeholder="默认：Bing每日一图" value="https://api.whitrayhb.top:19960/BingImage.php">
+                        <button class="ui blue button" onclick=setBackground()>确认</button>
+                      </div>
                 </div>
             </div>
         </div>

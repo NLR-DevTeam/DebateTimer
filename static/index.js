@@ -9,8 +9,8 @@ var posDebater1 = "";
 var posDebater2 = "";
 var negDebater1 = "";
 var negDebater2 = "";
-var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "自由辩论", "自由辩论", "结辩陈词", "结辩陈词"]
-var stageTimes = [180, 180, 180, 180, 150, 150, 120, 0, 0]//秒
+var stages = ["正方立论", "反方立论", "正方驳论", "反方驳论", "自由辩论", "自由辩论", "结辩陈词", "结辩陈词", "精彩点评", "精彩点评"]
+var stageTimes = [180, 180, 180, 180, 150, 150, 120, 0, 180, 0]//秒
 var posSecond = 0;
 var negSecond = 0;
 var intervals = [];
@@ -25,7 +25,7 @@ function initialize() {
     document.getElementById("nameListp").innerHTML = "正方一辩 " + posDebater1 + "<br>正方二辩 " + posDebater2;
     document.getElementById("nameListn").innerHTML = negDebater1 + " 反方一辩<br>" + negDebater2 + " 反方二辩";
     refreshStage();
-    for (var i = 0;i<20;i++) {
+    for (var i = 0; i < 20; i++) {
         clearInterval(i);
     }
     negTimerGoing = false;
@@ -94,13 +94,13 @@ function start() {
     posSecond = stageTimes[stageNow];
     negSecond = stageTimes[stageNow];
     refreshTimer();
-    if(stages[stageNow]=="结辩陈词"){
+    if (stages[stageNow] == "结辩陈词") {
         startButton.removeEventListener("click", start);
-        startButton.addEventListener("click", negativeLoopStart); 
+        startButton.addEventListener("click", negativeLoopStart);
         statuNow = 2;
-    }else{
+    } else {
         startButton.removeEventListener("click", start);
-        startButton.addEventListener("click", positiveLoopStart);   
+        startButton.addEventListener("click", positiveLoopStart);
     }
     refreshStage();
     if (stageNow < (stages.length - 1)) { stageNow++; }
@@ -151,9 +151,6 @@ function negativeLoopStart() {
                 statuNow = 1;
                 startButton.addEventListener("click", positiveLoopStart);
                 negTimerGoing = false;
-                    if(stages[stageNow]=="自由辩论"){
-                positiveLoopStart();
-                }
                 clearInterval(negloop);
             } else {
                 statuNow = 1;
@@ -204,4 +201,13 @@ function refreshTimer() {
         if (seconds < 10 && seconds >= 0) { seconds = "0" + seconds }
         negClock.innerHTML = minutes + ":" + seconds;
     }
+}
+
+function setBackground() {
+    const API = "https://api.whitrayhb.top:19960/BingImage.php";
+    let body = document.getElementById("body");
+    let input = document.getElementById("bgSetting").value;
+    if(true){}
+    body.style.backgroundImage = "";
+    body.style.backgroundColor = "#80d4ff";
 }
