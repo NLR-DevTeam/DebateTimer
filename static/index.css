@@ -7,7 +7,7 @@
     src: url(title.ttf);
 }
 
-#body {
+div.pusher#body {
     background-color: rgb(10,10,10);
     background-image: url(https://api.whitrayhb.top:19960/BingImage.php);
     background-attachment: fixed;

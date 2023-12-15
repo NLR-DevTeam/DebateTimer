@@ -207,7 +207,12 @@ function setBackground() {
     const API = "https://api.whitrayhb.top:19960/BingImage.php";
     let body = document.getElementById("body");
     let input = document.getElementById("bgSetting").value;
-    if(true){}
-    body.style.backgroundImage = "";
-    body.style.backgroundColor = "#80d4ff";
+    if (/#[\da-f]{6}/.test(input)) {
+        body.style.backgroundImage = "url()";
+        body.style.backgroundColor = input;
+    }
+    else {
+        body.style.backgroundImage = "url("+input+")";
+        body.style.backgroundColor = "";
+    }
 }
