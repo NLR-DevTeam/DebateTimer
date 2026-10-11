@@ -41,8 +41,6 @@ function playAudio(audio) {
 }
 
 var motion = "";
-var propStance = "";
-var oppStance = "";
 var posDebater1 = ""; // PM
 var posDebater2 = ""; // DPM
 var negDebater1 = ""; // LO
@@ -60,34 +58,6 @@ var stageNow = 0;
 var currentSeconds = 180;
 var isRunning = false;
 var timerLoop = null;
-
-// Format motion hint into "This house supports/opposes that <content>."
-function formatMotionText(baseText, content) {
-    if (!content || content.trim() === "") {
-        return baseText + "...";
-    }
-    let trimmed = content.trim();
-    if (!/[.!?。！？]$/.test(trimmed)) {
-        trimmed += ".";
-    }
-    return baseText + " " + trimmed;
-}
-
-// Refresh motion hints on page (below fixed Proposition and Opposition titles)
-function refreshMotionHints() {
-    let propHint = document.getElementById("motionProp");
-    let oppHint = document.getElementById("motionOpp");
-
-    let propContent = propStance && propStance.trim() !== "" ? propStance.trim() : motion;
-    let oppContent = oppStance && oppStance.trim() !== "" ? oppStance.trim() : motion;
-
-    if (propHint) {
-        propHint.innerHTML = formatMotionText("This house supports that", propContent);
-    }
-    if (oppHint) {
-        oppHint.innerHTML = formatMotionText("This house agrees that", oppContent);
-    }
-}
 
 // Helper to render debaters: role left-aligned, name right-aligned
 function renderDebaterList(role1, name1, role2, name2) {
@@ -128,7 +98,6 @@ function initialize() {
     document.getElementById("nameListp").innerHTML = renderDebaterList("PM", posDebater1, "DPM", posDebater2);
     document.getElementById("nameListn").innerHTML = renderDebaterList("LO", negDebater1, "DLO", negDebater2);
 
-    refreshMotionHints();
     refreshStage();
     refreshTimer();
 }
@@ -249,16 +218,12 @@ function readInformation() {
 // Synchronize state variables from modal input elements
 function syncStateFromInputs() {
     let tEl = document.getElementById("title");
-    let psEl = document.getElementById("propStance");
-    let osEl = document.getElementById("oppStance");
     let p1El = document.getElementById("pos1");
     let p2El = document.getElementById("pos2");
     let n1El = document.getElementById("neg1");
     let n2El = document.getElementById("neg2");
 
     if (tEl) motion = tEl.value.trim();
-    if (psEl) propStance = psEl.value.trim();
-    if (osEl) oppStance = osEl.value.trim();
     if (p1El) posDebater1 = p1El.value.trim();
     if (p2El) posDebater2 = p2El.value.trim();
     if (n1El) negDebater1 = n1El.value.trim();
@@ -268,16 +233,12 @@ function syncStateFromInputs() {
 // Synchronize modal input elements from state variables
 function syncInputsFromState() {
     let tEl = document.getElementById("title");
-    let psEl = document.getElementById("propStance");
-    let osEl = document.getElementById("oppStance");
     let p1El = document.getElementById("pos1");
     let p2El = document.getElementById("pos2");
     let n1El = document.getElementById("neg1");
     let n2El = document.getElementById("neg2");
 
     if (tEl) tEl.value = motion || "";
-    if (psEl) psEl.value = propStance || "";
-    if (osEl) osEl.value = oppStance || "";
     if (p1El) p1El.value = posDebater1 || "";
     if (p2El) p2El.value = posDebater2 || "";
     if (n1El) n1El.value = negDebater1 || "";
@@ -299,10 +260,6 @@ function parseConfigText(rawText) {
 
         if (key.indexOf('motion') !== -1 || key.indexOf('topic') !== -1 || key === '辩题') {
             result.motion = val;
-        } else if (key.indexOf('prop stance') !== -1 || key === 'proposition' || key === 'prop' || key === '正方') {
-            result.propStance = val;
-        } else if (key.indexOf('opp stance') !== -1 || key === 'opposition' || key === 'opp' || key === '反方') {
-            result.oppStance = val;
         } else if (key === 'pm' || key.indexOf('prime minister') !== -1 || key.indexOf('prop 1') !== -1 || key.indexOf('prop1') !== -1 || key === '正方一辩') {
             result.posDebater1 = val;
         } else if (key === 'dpm' || key.indexOf('deputy prime minister') !== -1 || key.indexOf('prop 2') !== -1 || key.indexOf('prop2') !== -1 || key === '正方二辩') {
@@ -328,8 +285,6 @@ function loadConfig() {
     let parsed = parseConfigText(text);
 
     if (parsed.motion !== undefined) motion = parsed.motion;
-    if (parsed.propStance !== undefined) propStance = parsed.propStance;
-    if (parsed.oppStance !== undefined) oppStance = parsed.oppStance;
     if (parsed.posDebater1 !== undefined) posDebater1 = parsed.posDebater1;
     if (parsed.posDebater2 !== undefined) posDebater2 = parsed.posDebater2;
     if (parsed.negDebater1 !== undefined) negDebater1 = parsed.negDebater1;
@@ -357,12 +312,6 @@ function exportConfig() {
     syncStateFromInputs();
     let lines = [];
     lines.push("Motion: " + (motion || ""));
-    if (propStance && propStance !== motion) {
-        lines.push("Proposition: " + propStance);
-    }
-    if (oppStance && oppStance !== motion) {
-        lines.push("Opposition: " + oppStance);
-    }
     lines.push("PM: " + (posDebater1 || ""));
     lines.push("DPM: " + (posDebater2 || ""));
     lines.push("LO: " + (negDebater1 || ""));
