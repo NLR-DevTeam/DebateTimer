@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Semantic-UI/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/index.css">
+    <link rel="icon" href="./favicon.ico">
+    <script src="./static/jquery-3.1.1.min.js"></script>
+    <script src="Semantic-UI/semantic.min.js"></script>
+    <script src="./static/index.js"></script>
+    <title>Debate Timer</title>
+</head>
+
+<body>
+    <div class="pushable">
+        <div class="pusher" id="body">
+            <header>
+                <h1 id="mainHeader"><span id="mainHeaderText">Debate Timer</span></h1>
+            </header>
+            <div id="main">
+                <div class="ui equal width stackable internally celled grid">
+                    <div style="margin: auto;">
+                        <p id="stage">Stage: </p>
+                    </div>
+                    <div class="center aligned row">
+                        <div class="column">
+                            <div class="centralContent">
+                                <h1>Proposition</h1>
+                                <p class="motion-hint" id="motionProp">This house supports that...</p>
+                            </div>
+                            <div class="content">
+                                <div class="nameList" id="nameListp">
+                                    <div class="debater-row">
+                                        <span class="debater-role">PM</span>
+                                        <span class="debater-name"></span>
+                                    </div>
+                                    <div class="debater-row">
+                                        <span class="debater-role">DPM</span>
+                                        <span class="debater-name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centralContent">
+                                <div class="timer">
+                                    <p id="clockp">0:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="centralContent">
+                                <h1>Opposition</h1>
+                                <p class="motion-hint" id="motionOpp">This house agrees that...</p>
+                            </div>
+                            <div class="content" style="margin-left: auto;">
+                                <div class="nameList" id="nameListn">
+                                    <div class="debater-row">
+                                        <span class="debater-role">LO</span>
+                                        <span class="debater-name"></span>
+                                    </div>
+                                    <div class="debater-row">
+                                        <span class="debater-role">DLO</span>
+                                        <span class="debater-name"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="centralContent">
+                                <div class="timer">
+                                    <p id="clockn">0:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controlPanel" style="margin: auto;">
+                        <button class="ui green icon button" id="start"><i class="play icon"></i></button>
+                        <button class="ui secondary icon button" id="pause"><i class="pause icon"></i></button>
+                        <button class="ui icon button" id="skip" onclick="skipStage()"><i
+                                class="forward icon"></i></button>
+                        <button class="ui icon button" id="reset" onclick="initialize()"><i
+                                class="undo icon"></i></button>
+                        <button class="ui icon button" id="settings" onclick="$('.ui.modal').modal('show');"><i
+                                class="cog icon"></i></button>
+                    </div>
+                </div>
+            </div>
+            <footer>Debate Timer v0.1 made by <a href="https://whitrayhb.top">@WhitrayHB</a> in <a
+                    href="https://nlrdev.top">NLR-DevTeam</a>, repo on <a
+                    href="https://github.com/NLR-DevTeam/DebateTimer">GitHub</a></footer>
+        </div>
+    </div>
+    <div class="ui modal" id="settings">
+        <i class="close icon"></i>
+        <div class="header">
+            Settings
+        </div>
+        <div class="ui equal width stackable internally celled grid">
+            <div class="center aligned row">
+                <div class="column">
+                    <div style="width: 100%;">
+                        <div class="header">
+                            <h3>Debate Info</h3>
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                Motion
+                            </div>
+                            <input type="text" placeholder="e.g. AI can enhance students' study" id="title">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                Prop Stance
+                            </div>
+                            <input type="text" placeholder="Defaults to Motion" id="propStance">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                Opp Stance
+                            </div>
+                            <input type="text" placeholder="Defaults to Motion" id="oppStance">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                PM
+                            </div>
+                            <input type="text" placeholder="PM (Prime Minister)" id="pos1">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                DPM
+                            </div>
+                            <input type="text" placeholder="DPM (Deputy Prime Minister)" id="pos2">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                LO
+                            </div>
+                            <input type="text" placeholder="LO (Leader of Opposition)" id="neg1">
+                        </div>
+                        <div class="ui fluid labeled input">
+                            <div class="ui label">
+                                DLO
+                            </div>
+                            <input type="text" placeholder="DLO (Deputy Leader of Opposition)" id="neg2">
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="header">
+                        <h3>Other Settings</h3>
+                    </div>
+                    <div class="ui fluid labeled action input">
+                        <div class="ui label">
+                            Background
+                        </div>
+                        <input type="text" id="bgSetting" placeholder="Default: Bing Daily Image" value="https://api.whitrayhb.top:19960/BingImage.php">
+                        <button class="ui blue button" onclick="setBackground()">Apply</button>
+                    </div>
+                    <div style="margin-top: 15px; text-align: left; padding: 5px;">
+                        <h4 style="margin-bottom: 5px;">Quick Config (Import / Export)</h4>
+                        <textarea id="configInput" rows="8" style="width: 100%; border-radius: 6px; border: 1px solid #ccc; padding: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: normal; font-size: 0.9em; resize: vertical;" placeholder="Motion: AI can enhance students' study&#10;PM: Alice&#10;DPM: Bob&#10;LO: Charlie&#10;DLO: David"></textarea>
+                        <div style="margin-top: 6px; display: flex; gap: 8px;">
+                            <button class="ui primary mini button" id="btnLoadConfig" onclick="loadConfig()">Load Config</button>
+                            <button class="ui secondary mini button" id="btnExportConfig" onclick="exportConfig()">Export Current</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui secondary right labeled icon button" onclick="$('.ui.modal').modal('hide');">
+                Cancel
+                <i class="close icon"></i>
+            </div>
+            <div class="ui positive right labeled icon button" onclick="readInformation()">
+                Save
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+    <script>
+        initialize();
+    </script>
+</body>

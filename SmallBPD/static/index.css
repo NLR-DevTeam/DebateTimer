@@ -1,0 +1,180 @@
+@font-face {
+    font-family: MiSans;
+    src: url(MiSans-Bold.ttf);
+}
+
+div.pusher#body {
+    background-color: rgb(10,10,10);
+    background-image: url(https://api.whitrayhb.top:19960/BingImage.php);
+    background-attachment: fixed;
+    background-size: cover;
+    inset: 0;
+    z-index: -1;
+    object-fit: cover;
+    margin: 0;
+}
+
+header {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+#mainHeader {
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin: 0 auto;
+    width: fit-content;
+    max-width: 90%;
+    box-sizing: border-box;
+    text-wrap: balance;
+    word-break: break-word;
+    color: #0a0a0a;
+    text-align: center;
+    font-size: 4em;
+    line-height: 1;
+    border-radius: 8px;
+    border-width: 4px;
+    font-family: MiSans;
+    background-color: rgba(221, 221, 221, 0.7);
+}
+
+#mainHeaderText {
+    display: inline;
+}
+
+#main {
+    margin: auto;
+    margin-top: 10px;
+    max-width: 90%;
+    min-width: 350px;
+    padding: 5px;
+    background-color: rgba(221, 221, 221, 0.7);
+    color: #202020;
+    font-family: MiSans;
+    border-radius: 8px;
+    border-width: 4px;
+    filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+}
+
+h1 {
+    font-size: 3em;
+    font-family: MiSans;
+}
+
+.motion-hint {
+    font-size: 1.15em;
+    font-family: MiSans;
+    margin-top: -6px;
+    margin-bottom: 4px;
+    padding-bottom: 28px;
+    color: #252525;
+    word-break: break-word;
+    line-height: 1.45;
+    font-style: italic;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    background-color: rgb(126, 180, 255);
+    max-width: fit-content;
+    min-width: 200px;
+    border-radius: 8px;
+    border-width: 4px;
+    color: white;
+    padding: 8px 14px;
+    display: block;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.centralContent {
+    margin: 0 auto;
+} 
+
+.nameList {
+    font-size: 1.85em;
+    width: 100%;
+}
+
+.debater-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    width: 100%;
+    line-height: 1.35;
+}
+
+.debater-role {
+    text-align: left;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.debater-name {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.timer {
+    font-size: 7em;
+}
+
+#stage {
+    font-size: 3em;
+    line-height: 1.15;
+    padding-top: 0;
+    padding-bottom: 12px;
+    margin: 0;
+}
+
+#configInput {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-weight: normal !important;
+    font-size: 0.9em;
+    line-height: 1.5;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    resize: vertical;
+}
+
+.i {
+    margin: auto;
+}
+
+* {
+    box-sizing: border-box;
+    scrollbar-width: none;
+    font-family: MiSans;
+}
+
+footer {
+    text-align: center;
+    font-family: sans-serif;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5%;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    background-color: rgb(209, 229, 255, 0.7);
+    border-radius: 8px;
+    border-width: 4px;
+    width: fit-content;
+}
+
+.ui.input {
+    margin: 5px;
+}
