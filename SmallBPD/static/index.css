@@ -82,6 +82,21 @@ h1 {
     box-sizing: border-box;
 }
 
+.debater-box {
+    cursor: pointer;
+    user-select: none;
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.debater-box:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+}
+
+.debater-box:active {
+    transform: translateY(1px);
+}
+
 .centralContent {
     margin: 0 auto;
 } 
@@ -89,6 +104,17 @@ h1 {
 .nameList {
     font-size: 1.85em;
     width: 100%;
+}
+
+.team-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.05em;
+    line-height: 1.25;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.5px;
 }
 
 .debater-row {
@@ -121,6 +147,34 @@ h1 {
     padding-top: 0;
     padding-bottom: 12px;
     margin: 0;
+}
+
+.ui.modal > .header,
+.ui.modal .header,
+.ui.modal h1,
+.ui.modal h2,
+.ui.modal h3,
+.ui.modal h4,
+.ui.modal h5,
+.ui.modal .ui.header,
+.ui.modal .label,
+h1, h2, h3, h4, h5,
+.ui.header {
+    font-family: MiSans, sans-serif !important;
+}
+
+input,
+input::placeholder,
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+.ui.input input,
+.ui.input input::placeholder,
+.ui.input input::-webkit-input-placeholder,
+.ui.input input::-moz-placeholder,
+.ui.input input:-ms-input-placeholder {
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    font-weight: normal !important;
 }
 
 #configInput {

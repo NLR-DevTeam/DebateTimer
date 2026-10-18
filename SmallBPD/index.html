@@ -27,7 +27,7 @@
                             <div class="centralContent">
                                 <h1>Proposition</h1>
                             </div>
-                            <div class="content">
+                            <div class="content debater-box" onclick="swapPropDebaters()" title="Click to swap PM and DPM">
                                 <div class="nameList" id="nameListp">
                                     <div class="debater-row">
                                         <span class="debater-role">PM</span>
@@ -49,7 +49,7 @@
                             <div class="centralContent">
                                 <h1>Opposition</h1>
                             </div>
-                            <div class="content" style="margin-left: auto;">
+                            <div class="content debater-box" style="margin-left: auto;" onclick="swapOppDebaters()" title="Click to swap LO and DLO">
                                 <div class="nameList" id="nameListn">
                                     <div class="debater-row">
                                         <span class="debater-role">LO</span>
@@ -71,10 +71,12 @@
                     <div class="controlPanel" style="margin: auto;">
                         <button class="ui green icon button" id="start"><i class="play icon"></i></button>
                         <button class="ui secondary icon button" id="pause"><i class="pause icon"></i></button>
+                        <button class="ui primary icon button" id="exchange" onclick="exchangeSides()"><i
+                                class="exchange icon"></i></button>
                         <button class="ui icon button" id="skip" onclick="skipStage()"><i
                                 class="forward icon"></i></button>
-                        <button class="ui icon button" id="reset" onclick="initialize()"><i
-                                class="undo icon"></i></button>
+                        <button class="ui icon button" id="nextMatch" onclick="nextMatch()" title="Next Group"><i
+                                class="step forward icon"></i></button>
                         <button class="ui icon button" id="settings" onclick="$('.ui.modal').modal('show');"><i
                                 class="cog icon"></i></button>
                     </div>
@@ -94,38 +96,66 @@
             <div class="center aligned row">
                 <div class="column">
                     <div style="width: 100%;">
-                        <div class="header">
-                            <h3>Debate Info</h3>
+                        <div class="header" style="margin-bottom: 10px; text-align: left; padding-left: 5px;">
+                            <h3 style="margin: 0;">Debate Info <span id="matchIndicator" style="font-size: 0.8em; color: #777; font-weight: normal;">(Group 1/1)</span></h3>
                         </div>
                         <div class="ui fluid labeled input">
                             <div class="ui label">
                                 Motion
                             </div>
-                            <input type="text" placeholder="e.g. AI can enhance students' study" id="title">
+                            <input type="text" placeholder="AI can enhance students' study" id="title">
+                        </div>
+                        <div style="display: flex; gap: 8px; margin: 5px;">
+                            <div class="ui fluid labeled input" style="flex: 1; margin: 0;">
+                                <div class="ui label">
+                                    Prop Team
+                                </div>
+                                <input type="text" placeholder="1" id="propTeam">
+                            </div>
+                            <div class="ui fluid labeled input" style="flex: 1; margin: 0;">
+                                <div class="ui label">
+                                    Oppo Team
+                                </div>
+                                <input type="text" placeholder="2" id="oppTeam">
+                            </div>
                         </div>
                         <div class="ui fluid labeled input">
-                            <div class="ui label">
-                                PM
+                            <div class="ui label" onclick="swapPropDebaters()" style="cursor: pointer;" title="Click to swap PM and DPM">
+                                PM <i class="exchange icon" style="margin-left: 4px; opacity: 0.6;"></i>
                             </div>
                             <input type="text" placeholder="PM (Prime Minister)" id="pos1">
                         </div>
                         <div class="ui fluid labeled input">
-                            <div class="ui label">
-                                DPM
+                            <div class="ui label" onclick="swapPropDebaters()" style="cursor: pointer;" title="Click to swap PM and DPM">
+                                DPM <i class="exchange icon" style="margin-left: 4px; opacity: 0.6;"></i>
                             </div>
                             <input type="text" placeholder="DPM (Deputy Prime Minister)" id="pos2">
                         </div>
                         <div class="ui fluid labeled input">
-                            <div class="ui label">
-                                LO
+                            <div class="ui label" onclick="swapOppDebaters()" style="cursor: pointer;" title="Click to swap LO and DLO">
+                                LO <i class="exchange icon" style="margin-left: 4px; opacity: 0.6;"></i>
                             </div>
                             <input type="text" placeholder="LO (Leader of Opposition)" id="neg1">
                         </div>
                         <div class="ui fluid labeled input">
-                            <div class="ui label">
-                                DLO
+                            <div class="ui label" onclick="swapOppDebaters()" style="cursor: pointer;" title="Click to swap LO and DLO">
+                                DLO <i class="exchange icon" style="margin-left: 4px; opacity: 0.6;"></i>
                             </div>
                             <input type="text" placeholder="DLO (Deputy Leader of Opposition)" id="neg2">
+                        </div>
+                        <div style="display: flex; gap: 8px; justify-content: flex-start; align-items: center; margin-top: 12px; padding-left: 5px;">
+                            <button class="ui icon button" id="btnPrevMatch" onclick="prevMatch()" title="Previous Group">
+                                <i class="step backward icon"></i>
+                            </button>
+                            <button class="ui icon button" id="btnNextMatchModal" onclick="nextMatch()" title="Next Group">
+                                <i class="step forward icon"></i>
+                            </button>
+                            <button class="ui green icon button" onclick="addNewGroup()" title="Add Group">
+                                <i class="plus icon"></i>
+                            </button>
+                            <button class="ui red icon button" onclick="deleteCurrentGroup()" title="Delete Group">
+                                <i class="trash icon"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -142,23 +172,30 @@
                     </div>
                     <div style="margin-top: 15px; text-align: left; padding: 5px;">
                         <h4 style="margin-bottom: 5px;">Quick Config (Import / Export)</h4>
-                        <textarea id="configInput" rows="8" style="width: 100%; border-radius: 6px; border: 1px solid #ccc; padding: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: normal; font-size: 0.9em; resize: vertical;" placeholder="Motion: AI can enhance students' study&#10;PM: Alice&#10;DPM: Bob&#10;LO: Charlie&#10;DLO: David"></textarea>
+                        <textarea id="configInput" rows="9" style="width: 100%; border-radius: 6px; border: 1px solid #ccc; padding: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: normal; font-size: 0.9em; resize: vertical;" placeholder="Group 1:&#10;Motion: AI can enhance students' study&#10;Prop Team: 1&#10;PM: Alice&#10;DPM: Bob&#10;Opp Team: 2&#10;LO: Charlie&#10;DLO: David&#10;&#10;Group 2:&#10;Motion: Ban homework&#10;Prop Team: 3&#10;PM: Eve&#10;DPM: Frank&#10;Opp Team: 4&#10;LO: Grace&#10;DLO: Heidi"></textarea>
                         <div style="margin-top: 6px; display: flex; gap: 8px;">
-                            <button class="ui primary mini button" id="btnLoadConfig" onclick="loadConfig()">Load Config</button>
-                            <button class="ui secondary mini button" id="btnExportConfig" onclick="exportConfig()">Export Current</button>
+                            <button class="ui primary icon button" id="btnLoadConfig" onclick="loadConfig()" title="Load Config"><i class="upload icon"></i></button>
+                            <button class="ui secondary icon button" id="btnExportConfig" onclick="exportConfig()" title="Export Current"><i class="download icon"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="actions">
-            <div class="ui secondary right labeled icon button" onclick="$('.ui.modal').modal('hide');">
-                Cancel
-                <i class="close icon"></i>
+        <div class="actions" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <div>
+                <button class="ui icon button" id="reset" onclick="resetCurrentMatch()" title="Reset Timer">
+                    <i class="undo icon"></i>
+                </button>
             </div>
-            <div class="ui positive right labeled icon button" onclick="readInformation()">
-                Save
-                <i class="checkmark icon"></i>
+            <div style="display: flex; gap: 8px; margin-left: auto;">
+                <div class="ui secondary right labeled icon button" onclick="$('.ui.modal').modal('hide');">
+                    Cancel
+                    <i class="close icon"></i>
+                </div>
+                <div class="ui positive right labeled icon button" onclick="readInformation()">
+                    Save
+                    <i class="checkmark icon"></i>
+                </div>
             </div>
         </div>
     </div>
