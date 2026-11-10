@@ -114,6 +114,22 @@ h1 {
     transform: translateY(1px);
 }
 
+.side-header {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.side-header:hover {
+    opacity: 0.78;
+    transform: translateY(-1px);
+}
+
+.side-header:active {
+    transform: translateY(1px);
+}
+
 .centralContent {
     margin: 0 auto;
 } 

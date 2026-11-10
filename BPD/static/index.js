@@ -321,6 +321,44 @@ function swapCODebaters() {
     saveCurrentMatchFromState();
 }
 
+// Swap Opening Government (PM/DPM) and Closing Government (GM/GW) teams
+function swapPropTeams() {
+    let tmpTeam = ogTeam;
+    let tmpFirst = pmDebater;
+    let tmpSecond = dpmDebater;
+
+    ogTeam = cgTeam;
+    pmDebater = gmDebater;
+    dpmDebater = gwDebater;
+
+    cgTeam = tmpTeam;
+    gmDebater = tmpFirst;
+    gwDebater = tmpSecond;
+
+    renderAllDebaterBoxes();
+    syncInputsFromState();
+    saveCurrentMatchFromState();
+}
+
+// Swap Opening Opposition (LO/DLO) and Closing Opposition (OM/OW) teams
+function swapOppTeams() {
+    let tmpTeam = ooTeam;
+    let tmpFirst = loDebater;
+    let tmpSecond = dloDebater;
+
+    ooTeam = coTeam;
+    loDebater = omDebater;
+    dloDebater = owDebater;
+
+    coTeam = tmpTeam;
+    omDebater = tmpFirst;
+    owDebater = tmpSecond;
+
+    renderAllDebaterBoxes();
+    syncInputsFromState();
+    saveCurrentMatchFromState();
+}
+
 // Exchange sides: swap Proposition (OG & CG) and Opposition (OO & CO) teams and debaters
 function exchangeSides() {
     let tmpOgTeam = ogTeam;
